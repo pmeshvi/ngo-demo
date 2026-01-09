@@ -1,0 +1,12 @@
+.right-sidebar {
+  width: 300px;
+  float: right;
+}
+
+@media (max-width: 768px) {
+  .right-sidebar {
+    width: 100%;
+    float: none;
+    position: relative;
+  }
+}
