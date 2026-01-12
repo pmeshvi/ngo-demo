@@ -1,40 +1,51 @@
 'use client';
+
 import { jsPDF } from 'jspdf';
 
-export default function GenerateReceipt({ donorName, ngoName, amount, disabled }) {
-  const generateReceipt = () => {
-    if (disabled) {
-      alert("You must confirm payment before generating the receipt!");
-      return;
-    }
+export default function GenerateReceipt({
+  donorName,
+  ngoName,
+  amount,
+  disabled
+}) {
+  const generatePDF = () => {
+    if (disabled) return;
 
     const doc = new jsPDF();
 
-    doc.setFontSize(16);
-    doc.text("Donation Receipt", 105, 20, { align: "center" });
+    doc.setFontSize(18);
+    doc.text('Donation Receipt', 70, 20);
 
     doc.setFontSize(12);
     doc.text(`Donor Name: ${donorName}`, 20, 40);
-    doc.text(`NGO: ${ngoName}`, 20, 50);
-    doc.text(`Amount: INR ${amount}`, 20, 60); // Use INR for safety
-    doc.text(`Date: ${new Date().toLocaleString()}`, 20, 70);
+    doc.text(`NGO Name: ${ngoName}`, 20, 50);
 
-    doc.text("Thank you for your donation!", 105, 100, { align: "center" });
+    // ✅ FIXED AMOUNT (NO ₹ SYMBOL)
+    doc.text(`Amount Donated: Rs. ${amount}`, 20, 60);
 
-    doc.save(`Receipt-${ngoName}-${Date.now()}.pdf`);
+    doc.text('Payment Mode: UPI / QR', 20, 70);
+    doc.text('Status: Payment Confirmed', 20, 80);
+
+    const date = new Date().toLocaleDateString();
+    doc.text(`Date: ${date}`, 20, 90);
+
+    doc.text('Thank you for supporting our NGO!', 20, 110);
+
+    doc.save(`Donation_Receipt_${donorName}.pdf`);
   };
 
   return (
-    <button
-      onClick={generateReceipt}
-      disabled={disabled === false} // Disable if payment not confirmed
-      className={`mt-4 px-4 py-2 rounded text-white ${
-        disabled
-          ? "bg-green-600 hover:bg-green-700"
-          : "bg-gray-600 cursor-not-allowed"
-      }`}
-    >
-      I Paid / Generate Receipt
-    </button>
+    <div className="mt-4 w-full max-w-sm">
+      <button
+        onClick={generatePDF}
+        disabled={disabled}
+        className={`w-full py-2 rounded font-semibold
+          ${disabled ? 'bg-gray-600' : 'bg-green-600 hover:bg-green-700'}
+        `}
+      >
+        Generate Receipt (PDF)
+      </button>
+      
+    </div>
   );
 }
