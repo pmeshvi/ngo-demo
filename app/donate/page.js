@@ -14,51 +14,39 @@ export default function DonatePage() {
   const qrImage = null;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-950 via-gray-900 to-slate-900 flex items-center justify-center p-4">
-      
-      <div className="bg-slate-800/90 backdrop-blur w-full max-w-md rounded-2xl shadow-2xl p-6 border border-slate-700">
+    <div className="min-h-screen bg-gray-900 flex items-center justify-center p-4">
+      <div className="bg-gray-800 text-white w-full max-w-md rounded-xl shadow-lg p-6">
 
-        {/* Header */}
-        <h1 className="text-2xl font-bold text-center mb-1 text-indigo-300">
+        {/* Title */}
+        <h1 className="text-2xl font-bold text-center mb-4">
           Donate to {ngoName}
         </h1>
-        <p className="text-center text-sm text-slate-400 mb-5">
-          Your contribution creates real impact 🌱
-        </p>
 
         {/* Donor Name */}
         <div className="mb-4">
-          <label className="block text-sm mb-1 text-slate-300">
-            Donor Name
-          </label>
+          <label className="block text-sm mb-1">Your Name</label>
           <input
             type="text"
             placeholder="Enter your name"
             value={donorName}
             onChange={(e) => setDonorName(e.target.value)}
-            className="w-full px-3 py-2 rounded-lg bg-slate-900 border border-slate-600 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full px-3 py-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:border-blue-500"
           />
         </div>
 
-        {/* QR Section */}
-        <div className="bg-slate-900 rounded-xl p-4 border border-slate-700">
-          <DonationQRCode
-            ngoName={ngoName}
-            upiId={upiId}
-            qrImage={qrImage}
-            amount={amount}
-            setAmount={setAmount}
-          />
-        </div>
+        {/* QR Code */}
+        <DonationQRCode
+          ngoName={ngoName}
+          upiId={upiId}
+          qrImage={qrImage}
+          amount={amount}
+          setAmount={setAmount}
+        />
 
         {/* Payment Confirmation */}
         <div
-          className={`mt-4 p-3 rounded-xl flex items-center gap-2 border
-          ${
-            paidConfirmed
-              ? 'bg-green-950 border-green-700'
-              : 'bg-red-950 border-red-700'
-          }`}
+          className={`mt-4 p-3 rounded flex items-center gap-2
+          ${paidConfirmed ? 'bg-green-900' : 'bg-red-900'}`}
         >
           <input
             type="checkbox"
@@ -71,17 +59,17 @@ export default function DonatePage() {
           </span>
         </div>
 
-        {/* Status Text */}
+        {/* Status */}
         <p
-          className={`mt-2 text-sm font-semibold
+          className={`mt-2 text-sm font-medium
           ${paidConfirmed ? 'text-green-400' : 'text-red-400'}`}
         >
-          {paidConfirmed ? 'Payment Confirmed ✔' : 'Payment Not Confirmed ✖'}
+          {paidConfirmed ? 'Payment Confirmed ✅' : 'Payment Not Confirmed ❌'}
         </p>
 
         {/* Generate Receipt */}
         {donorName && (
-          <div className="mt-5">
+          <div className="mt-4">
             <GenerateReceipt
               donorName={donorName}
               ngoName={ngoName}
