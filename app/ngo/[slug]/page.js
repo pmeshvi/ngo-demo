@@ -1,6 +1,6 @@
 import { ngos } from '../../data/ngos';
 import { donations } from '../../data/donations';
-import Chat from '../../components/Chat'; // ✅ ADDED
+import Chat from '../../../components/Chat';
 
 // Next.js App Router page must be async to unwrap params
 export default async function NGODetail({ params }) {
