@@ -5,6 +5,8 @@ import { translations } from './utils/translations';
 import LanguageSwitcher from './components/LanguageSwitcher';
 import { ngos } from './data/ngos';
 import Chat from './components/Chat'; // AI Chat component
+import Chat from "../../components/Chat";
+
 
 export default function HomePage() {
   const [lang, setLang] = useState('en');
