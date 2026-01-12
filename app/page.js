@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { translations } from './utils/translations';
 import LanguageSwitcher from './components/LanguageSwitcher';
 import { ngos } from './data/ngos';
-import Chat from './components/Chat'; // AI Chat component
+import Chat from "../../components/Chat";
 import Chat from "../../components/Chat";
 
 
